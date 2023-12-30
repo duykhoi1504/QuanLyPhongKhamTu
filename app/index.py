@@ -1,7 +1,7 @@
-from flask import Flask,render_template,request
-import dao
-app=Flask(__name__)
+from flask import render_template,request
 
+from app import app
+import dao
 
 @app.route("/")
 def index():
