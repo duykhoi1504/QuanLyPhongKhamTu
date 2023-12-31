@@ -2,6 +2,15 @@
 {% block title %} trang chủ {% endblock %}
 
 {% block content %}
+<!--Pageination-->
+<nav aria-label="Page navigation example" class="d-flex justify-content-center" style="margin-top:12px">
+  <ul class="pagination" >
+      {% for i in range(pages) %}
+    <li class="page-item"><a class="page-link" href="/?page={{i+1}}">{{i+1}}</a></li>
+    {% endfor %}
+  </ul>
+</nav>
+<!---->
 <div id="carouselExampleDark" class="carousel carousel-dark slide">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
@@ -55,7 +64,7 @@
                     <h4 class="card-title">{{ p.name }}</h4>
                     <p class="card-text">{{ p.price }}</p>
                     <a href="/products/{{p.id}}" class="btn btn-primary">xem chi tiết</a>
-                    <a href="#" class="btn btn-primary">buy</a>
+                    <a href="#" class="btn btn-primary" onclick="addToCart({{p.id}}, '{{p.name}}', {{p.price}})" >buy</a>
                 </div>
             </div>
         </div>
@@ -173,6 +182,6 @@
 </div>
 <!-- Background image -->
 <!--  test-->
-
+<script src="{{ url_for('static', filename='js/cart.js') }}"></script>
 <!---->
 {% endblock %}

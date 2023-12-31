@@ -68,7 +68,12 @@ if __name__=="__main__":
         # p3 = Product(name="IPhone13 Pro Max", price=30000000, Category_ID=2,  image= "https://mobilepriceall.com/wp-content/uploads/2022/09/Apple-iPhone-14-1024x1024.jpg")
         # p4 = Product(name="IPhone16 Pro Max", price=40000000, Category_ID=1,  image= "https://mobilepriceall.com/wp-content/uploads/2022/09/Apple-iPhone-14-1024x1024.jpg")
         # p5 = Product(name="IPhone19 Pro Max", price=90000000, Category_ID=1,  image= "https://mobilepriceall.com/wp-content/uploads/2022/09/Apple-iPhone-14-1024x1024.jpg")
-
+        # p6 = Product(name="Samsung", price=10000000, Category_ID=2, image= "https://mobilepriceall.com/wp-content/uploads/2022/09/Apple-iPhone-14-1024x1024.jpg")
+        # p7 = Product(name="Oppo Pro Max", price=20000000, Category_ID=2, image= "https://mobilepriceall.com/wp-content/uploads/2022/09/Apple-iPhone-14-1024x1024.jpg")
+        # p8 = Product(name="realme Pro Max", price=30000000, Category_ID=2,  image= "https://mobilepriceall.com/wp-content/uploads/2022/09/Apple-iPhone-14-1024x1024.jpg")
+        # p9 = Product(name="Oppo 2", price=40000000, Category_ID=1,  image= "https://mobilepriceall.com/wp-content/uploads/2022/09/Apple-iPhone-14-1024x1024.jpg")
+        # p10 = Product(name="Samsung2 Pro Max", price=90000000, Category_ID=1,  image= "https://mobilepriceall.com/wp-content/uploads/2022/09/Apple-iPhone-14-1024x1024.jpg")
         # db.session.add_all([p1, p2, p3, p4, p5])
+        # db.session.add_all([p6, p7, p8, p9, p10])
         # db.session.commit()
         #######
