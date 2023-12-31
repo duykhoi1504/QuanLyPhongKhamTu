@@ -39,31 +39,35 @@ def login_admin_process():
     return redirect('/admin')
 
 
-@login.user_loader
-def load_user(user_id):
-    return dao.get_user_by_id(user_id)
-
-
 @app.route('/api/cart', methods=['post'])
 def add_cart():
     cart = session.get('cart')
     if cart is None:
         cart = {}
     data = request.json
-    id = data.get("id")
+    id = str(data.get("id"))
 
-    if id in cart: #san pham da co trong gio
-        cart[id]['quantity']= cart[id]['quantity']+1
-    else:#san pham chua co trong gio
+    if id in cart:  # san pham da co trong gio
+        cart[id]["quantity"] = cart[id]["quantity"]+1
+    else:  # san pham chua co trong gio
         cart[id] = {
             "id": id,
-            "name": data.get('name'),
-            "price": data.get('price'),
+            "name": data.get("name"),
+            "price": data.get("price"),
             "quantity": 1
         }
     session['cart'] = cart
 
     return jsonify(utils.count_cart(cart))
+    # return jsonify({
+    #     "total_quantity":10,
+    #     "total_price": 100
+    # })
+
+
+@login.user_loader
+def load_user(user_id):
+    return dao.get_user_by_id(user_id)
 
 
 if __name__ == '__main__':
