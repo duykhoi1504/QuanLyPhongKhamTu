@@ -1,9 +1,9 @@
 import math
 
-from flask import render_template, request, redirect, session, jsonify
+from flask import render_template, request, redirect, session, jsonify,flash
 import dao, utils
 from app import app, login
-from flask_login import login_user
+from flask_login import login_user, logout_user
 
 
 @app.route("/")
@@ -40,6 +40,36 @@ def login_user_process():
         next = request.args.get('next')
         return  redirect('/' if next is None else next)
     return render_template('login.html')
+
+
+@app.route('/logout')
+def logout_user_process():
+    logout_user()
+    return redirect("/login")
+
+
+@app.route('/register', methods=['post', 'get'])
+def register_user():
+    err_msg = ""
+    if request.method.__eq__('POST'):
+        password = request.form.get('password')
+        confirm = request.form.get('confirm')
+        if password.__eq__(confirm):
+            try:
+                dao.add_user(name=request.form.get('name'),
+                             username=request.form.get('username'),
+                             password=password,
+                             avatar=request.files.get('avatar'))
+            except:
+                err_msg='he thong dang bi loi!!!'
+            else:
+                return redirect('/login')
+            #avatar là lấy từ trường name trong register.html
+            # request.files['avatar']
+        else:
+            err_msg="Mật khẩu ko khớp!!!!!"
+
+    return render_template('register.html', err_msg=err_msg)
 
 
 @app.route("/admin/login", methods=['post'])

@@ -23,22 +23,22 @@
                     <a class="nav-link" href="javascript:void(0)">Bài Viết</a>
                 </li>
 
-                <li class="nav-item" style="background-color:green">
+                <li class="nav-item" style="">
                     <a class="nav-link text-light" href="/">Đặt lịch Ngay</a>
                 </li>
 
-                <li class="nav-item" style="background-color:blue; margin-left:12px">
+                <li class="nav-item" style=" margin-left:12px">
                     <a class="nav-link text-light" href="/cart">Giỏ hàng <span class="badge bg-danger cart-counter">{{cart.total_quantity}}</span></a>
                 </li>
 
                 {% if current_user.is_authenticated %}
                 <li class="nav-item" style=" margin-left:12px">
-                    <a class="nav-link text-info" href="/login">
-                        <img src="{{current_user.avatar}}" style="width:40px" class="img-thumbnail" alt=""> chào {{current_user.username}}</img>
+                    <a class="nav-link text-info" href="/">
+                        <img src="{{current_user.avatar}}" style="width:24px" class="rounded" alt=""> chào {{current_user.username}}</img>
                     </a>
                 </li>
                 <li class="nav-item" style=" margin-left:12px">
-                    <a class="nav-link text-info" href="/register">Đăng kí</a>
+                    <a class="nav-link text-info" href="/logout">Đăng xuất</a>
                 </li>
                 {% else %}
                 <li class="nav-item" style=" margin-left:12px">

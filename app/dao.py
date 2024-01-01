@@ -1,6 +1,6 @@
 from app.models import Category, Product, User
 import hashlib
-from app import app
+from app import app, db
 def load_categories():
     return Category.query.all()
 
@@ -31,3 +31,11 @@ def auth_user(username, password):
     password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
     return User.query.filter(User.username.__eq__(username.strip()),
                              User.password.__eq__(password)).first()
+
+
+def add_user(name, username, password, avatar):
+    password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
+    u = User(name=name, username=username, password=password,
+             avatar='https://th.bing.com/th/id/OIP.48Pj-NVeziMTgdX6rHGpKAHaI1?w=162&h=194&c=7&r=0&o=5&dpr=1.1&pid=1.7')
+    db.session.add(u)
+    db.session.commit()
