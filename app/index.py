@@ -17,7 +17,7 @@ def index():
     total = dao.count_product()
 
     return render_template("index.html",
-                           categories=cates,
+
                            products=products,
                            pages=math.ceil(total / app.config['PAGE_SIZE'])                           )
 
@@ -25,6 +25,21 @@ def index():
 @app.route("/products/<id>")
 def details(id):
     return render_template('details.html', id=id)
+
+
+@app.route('/login',methods=['post', 'get'])
+def login_user_process():
+    if request.method.__eq__('POST'):
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        user = dao.auth_user(username=username, password=password)
+        if user:
+            login_user(user=user)
+
+        next = request.args.get('next')
+        return  redirect('/' if next is None else next)
+    return render_template('login.html')
 
 
 @app.route("/admin/login", methods=['post'])
@@ -59,10 +74,44 @@ def add_cart():
     session['cart'] = cart
 
     return jsonify(utils.count_cart(cart))
-    # return jsonify({
-    #     "total_quantity":10,
-    #     "total_price": 100
-    # })
+
+
+@app.route('/api/cart/<product_id>', methods=['put'])
+def update_cart(product_id):
+    cart = session.get('cart')
+    if cart and product_id in cart:
+        quantity = request.json.get('quantity')
+        cart[product_id]['quantity'] = int(quantity)
+
+    session['cart'] = cart
+
+    return jsonify(utils.count_cart(cart))
+
+
+@app.route('/api/cart/<product_id>', methods=['delete'])
+def delete_cart(product_id):
+    cart = session.get('cart')
+    if cart and product_id in cart:
+        del cart[product_id]
+
+    session['cart'] = cart
+
+    return jsonify(utils.count_cart(cart))
+
+
+@app.route('/cart')
+def cart_list():
+    return render_template('cart.html')
+
+
+
+
+@app.context_processor#trang nao cung se co du lieu nay`
+def common_resp():
+    return{
+        'caregories': dao.load_categories(),
+        'cart': utils.count_cart(session.get('cart'))
+    }
 
 
 @login.user_loader

@@ -6,5 +6,5 @@ def count_cart(cart):
             total_amount += c['quantity']*c['price']
     return{
         'total_quantity': total_quantity,
-        'total_price': total_amount
+        'total_amount': total_amount
     }
