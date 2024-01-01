@@ -32,11 +32,13 @@
 </div>
 <div>
     {% if current_user.is_authenticated %}
-    <button class="btn btn-success" >thanh toan</button>
+    <button class="btn btn-success" onclick="pay()" >thanh toan</button>
     {% else %}
     <p>vui lòng <a href="/login?next=/cart">đăng nhập</a> để thanh toán</p>
     {% endif %}
 </div>
+{%  else %}
+<h1 class="alert alert-info">Khong có sàn phầm nào trong giỏ</h1>
 {% endif %}
 
 {% endblock %}

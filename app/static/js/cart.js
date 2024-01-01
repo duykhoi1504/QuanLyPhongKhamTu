@@ -52,3 +52,21 @@ function deleteCart(id,obj){
     });
     }
 }
+
+function pay() {
+    // Display a confirmation dialog and proceed if the user clicks "OK"
+    if (confirm("Bạn chắc chắn thanh toán!") === true) {
+        // Make a POST request to the "/api/pay" endpoint
+        fetch("/api/pay", {
+            method: 'post'
+        }).then(res => res.json()).then(data => {
+            // Check the response status and take action accordingly
+            if (data.status === 200)
+                // If the payment was successful, reload the page
+                location.reload();
+            else
+                // If there was an error, display the error message
+                alert(data.err_msg);
+        });
+    }
+}
